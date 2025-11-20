@@ -1,0 +1,398 @@
+openapi: 3.0.3
+info:
+  title: User Management API
+  description: REST API for managing users in the migrated Spring Boot application
+  version: 1.0.0
+  contact:
+    name: Development Team
+servers:
+  - url: http://localhost:8080/api
+    description: Development server
+
+tags:
+  - name: Users
+    description: User management operations
+
+paths:
+  /users:
+    get:
+      tags:
+        - Users
+      summary: Get all users
+      description: Retrieves a list of all users in the system
+      operationId: getAllUsers
+      responses:
+        '200':
+          description: Successfully retrieved user list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserDTO'
+              example:
+                - id: 1
+                  firstName: John
+                  lastName: Doe
+                  email: john.doe@example.com
+                  phone: "555-0101"
+                - id: 2
+                  firstName: Jane
+                  lastName: Smith
+                  email: jane.smith@example.com
+                  phone: "555-0102"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    post:
+      tags:
+        - Users
+      summary: Create a new user
+      description: Creates a new user with the provided information
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+            example:
+              firstName: Mike
+              lastName: Johnson
+              email: mike.johnson@example.com
+              phone: "555-0103"
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+              example:
+                id: 3
+                firstName: Mike
+                lastName: Johnson
+                email: mike.johnson@example.com
+                phone: "555-0103"
+        '400':
+          description: Invalid input or validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+              example:
+                message: Validation failed
+                errors:
+                  firstName: First name is required
+                  email: Email must be a valid email address
+        '409':
+          description: Email already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: A user with this email already exists
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /users/{id}:
+    get:
+      tags:
+        - Users
+      summary: Get user by ID
+      description: Retrieves a single user by their unique identifier
+      operationId: getUserById
+      parameters:
+        - name: id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 1
+      responses:
+        '200':
+          description: Successfully retrieved user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+              example:
+                id: 1
+                firstName: John
+                lastName: Doe
+                email: john.doe@example.com
+                phone: "555-0101"
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: User not found with ID: 1
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    put:
+      tags:
+        - Users
+      summary: Update user
+      description: Updates an existing user's information
+      operationId: updateUser
+      parameters:
+        - name: id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+            example:
+              firstName: John
+              lastName: Doe Updated
+              email: john.doe.updated@example.com
+              phone: "555-9999"
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+              example:
+                id: 1
+                firstName: John
+                lastName: Doe Updated
+                email: john.doe.updated@example.com
+                phone: "555-9999"
+        '400':
+          description: Invalid input or validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: User not found with ID: 1
+        '409':
+          description: Email already exists (if changing email to one that's taken)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: A user with this email already exists
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    delete:
+      tags:
+        - Users
+      summary: Delete user
+      description: Permanently deletes a user from the system
+      operationId: deleteUser
+      parameters:
+        - name: id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+            example: 1
+      responses:
+        '204':
+          description: User deleted successfully (no content returned)
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                message: User not found with ID: 1
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    UserDTO:
+      type: object
+      description: User data transfer object for API responses
+      required:
+        - id
+        - firstName
+        - lastName
+        - email
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the user
+          example: 1
+        firstName:
+          type: string
+          maxLength: 50
+          description: User's first name
+          example: John
+        lastName:
+          type: string
+          maxLength: 50
+          description: User's last name
+          example: Doe
+        email:
+          type: string
+          format: email
+          maxLength: 100
+          description: User's email address (unique)
+          example: john.doe@example.com
+        phone:
+          type: string
+          maxLength: 20
+          nullable: true
+          description: User's phone number (optional)
+          example: "555-0101"
+
+    CreateUserRequest:
+      type: object
+      description: Request body for creating a new user
+      required:
+        - firstName
+        - lastName
+        - email
+      properties:
+        firstName:
+          type: string
+          maxLength: 50
+          minLength: 1
+          description: User's first name
+          example: John
+        lastName:
+          type: string
+          maxLength: 50
+          minLength: 1
+          description: User's last name
+          example: Doe
+        email:
+          type: string
+          format: email
+          maxLength: 100
+          minLength: 1
+          description: User's email address (must be unique)
+          example: john.doe@example.com
+        phone:
+          type: string
+          maxLength: 20
+          nullable: true
+          description: User's phone number (optional)
+          example: "555-0101"
+
+    UpdateUserRequest:
+      type: object
+      description: Request body for updating an existing user
+      required:
+        - firstName
+        - lastName
+        - email
+      properties:
+        firstName:
+          type: string
+          maxLength: 50
+          minLength: 1
+          description: User's first name
+          example: John
+        lastName:
+          type: string
+          maxLength: 50
+          minLength: 1
+          description: User's last name
+          example: Doe
+        email:
+          type: string
+          format: email
+          maxLength: 100
+          minLength: 1
+          description: User's email address (must be unique)
+          example: john.doe@example.com
+        phone:
+          type: string
+          maxLength: 20
+          nullable: true
+          description: User's phone number (optional)
+          example: "555-0101"
+
+    ErrorResponse:
+      type: object
+      description: Generic error response
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+          example: An error occurred processing your request
+        timestamp:
+          type: string
+          format: date-time
+          description: When the error occurred
+          example: "2025-11-20T10:30:00Z"
+
+    ValidationErrorResponse:
+      type: object
+      description: Validation error response with field-specific errors
+      required:
+        - message
+        - errors
+      properties:
+        message:
+          type: string
+          description: General validation error message
+          example: Validation failed
+        errors:
+          type: object
+          description: Map of field names to error messages
+          additionalProperties:
+            type: string
+          example:
+            firstName: First name is required
+            email: Email must be a valid email address
+        timestamp:
+          type: string
+          format: date-time
+          description: When the validation error occurred
+          example: "2025-11-20T10:30:00Z"
