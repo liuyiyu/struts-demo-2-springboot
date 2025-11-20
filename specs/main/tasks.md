@@ -19,13 +19,13 @@
 
 **Purpose**: Project initialization and basic structure for both backend and frontend
 
-- [ ] T001 Create backend project structure: backend/src/main/java/com/example/usermanagement/ with controller/, service/, repository/, model/, dto/, exception/ subdirectories
-- [ ] T002 Create backend/pom.xml with Spring Boot 3.2.x parent, spring-boot-starter-web, spring-boot-starter-data-jpa, h2 database, validation-api dependencies
-- [ ] T003 [P] Create backend/src/main/resources/application.properties with H2 database configuration, JPA settings, server port 8080, CORS configuration
-- [ ] T004 [P] Create frontend project structure using Vite: frontend/src/ with components/, services/, types/ subdirectories
-- [ ] T005 [P] Create frontend/package.json with React 18, TypeScript 5, Vite 5, Axios, React Router dependencies
-- [ ] T006 [P] Create frontend/tsconfig.json and frontend/vite.config.ts configuration files
-- [ ] T007 Create backend/src/main/java/com/example/usermanagement/UserManagementApplication.java as Spring Boot main class with @SpringBootApplication
+- [X] T001 Create backend project structure: backend/src/main/java/com/example/usermanagement/ with controller/, service/, repository/, model/, dto/, exception/ subdirectories
+- [X] T002 Create backend/pom.xml with Spring Boot 3.2.x parent, spring-boot-starter-web, spring-boot-starter-data-jpa, h2 database, validation-api dependencies
+- [X] T003 [P] Create backend/src/main/resources/application.properties with H2 database configuration, JPA settings, server port 8080, CORS configuration
+- [X] T004 [P] Create frontend project structure using Vite: frontend/src/ with components/, services/, types/ subdirectories
+- [X] T005 [P] Create frontend/package.json with React 18, TypeScript 5, Vite 5, Axios, React Router dependencies
+- [X] T006 [P] Create frontend/tsconfig.json and frontend/vite.config.ts configuration files
+- [X] T007 Create backend/src/main/java/com/example/usermanagement/UserManagementApplication.java as Spring Boot main class with @SpringBootApplication
 
 ---
 
@@ -35,16 +35,16 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T008 Create User JPA entity in backend/src/main/java/com/example/usermanagement/model/User.java with @Entity, @Table(name="users"), @Id, @GeneratedValue, all fields with @Column annotations
-- [ ] T009 Add Bean Validation annotations to User entity (@NotBlank, @Email, @Size) matching data-model.md specification
-- [ ] T010 [P] Create UserDTO in backend/src/main/java/com/example/usermanagement/dto/UserDTO.java for API responses with all User fields
-- [ ] T011 [P] Create CreateUserRequest DTO in backend/src/main/java/com/example/usermanagement/dto/CreateUserRequest.java with validation annotations
-- [ ] T012 [P] Create UpdateUserRequest DTO in backend/src/main/java/com/example/usermanagement/dto/UpdateUserRequest.java with validation annotations
-- [ ] T013 Create UserRepository interface in backend/src/main/java/com/example/usermanagement/repository/UserRepository.java extending JpaRepository<User, Long> with findByEmail and existsByEmail methods
-- [ ] T014 Create GlobalExceptionHandler in backend/src/main/java/com/example/usermanagement/exception/GlobalExceptionHandler.java with @ControllerAdvice, handling MethodArgumentNotValidException, DataIntegrityViolationException, EntityNotFoundException
-- [ ] T015 [P] Create backend/src/main/resources/data.sql with INSERT statements for 3 sample users (John Doe, Jane Smith, Mike Johnson)
-- [ ] T016 [P] Create User TypeScript interface in frontend/src/types/User.ts matching UserDTO structure
-- [ ] T017 [P] Create userService.ts API client in frontend/src/services/userService.ts with Axios instance configured for http://localhost:8080/api base URL
+- [X] T008 Create User JPA entity in backend/src/main/java/com/example/usermanagement/model/User.java with @Entity, @Table(name="users"), @Id, @GeneratedValue, all fields with @Column annotations
+- [X] T009 Add Bean Validation annotations to User entity (@NotBlank, @Email, @Size) matching data-model.md specification
+- [X] T010 [P] Create UserDTO in backend/src/main/java/com/example/usermanagement/dto/UserDTO.java for API responses with all User fields
+- [X] T011 [P] Create CreateUserRequest DTO in backend/src/main/java/com/example/usermanagement/dto/CreateUserRequest.java with validation annotations
+- [X] T012 [P] Create UpdateUserRequest DTO in backend/src/main/java/com/example/usermanagement/dto/UpdateUserRequest.java with validation annotations
+- [X] T013 Create UserRepository interface in backend/src/main/java/com/example/usermanagement/repository/UserRepository.java extending JpaRepository<User, Long> with findByEmail and existsByEmail methods
+- [X] T014 Create GlobalExceptionHandler in backend/src/main/java/com/example/usermanagement/exception/GlobalExceptionHandler.java with @ControllerAdvice, handling MethodArgumentNotValidException, DataIntegrityViolationException, EntityNotFoundException
+- [X] T015 [P] Create backend/src/main/resources/data.sql with INSERT statements for 3 sample users (John Doe, Jane Smith, Mike Johnson)
+- [X] T016 [P] Create User TypeScript interface in frontend/src/types/User.ts matching UserDTO structure
+- [X] T017 [P] Create userService.ts API client in frontend/src/services/userService.ts with Axios instance configured for http://localhost:8080/api base URL
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -58,14 +58,14 @@
 
 ### Implementation for User Story 1
 
-- [ ] T018 [P] [US1] Implement UserService.getAllUsers() method in backend/src/main/java/com/example/usermanagement/service/UserService.java calling userRepository.findAll() and mapping to UserDTO list
-- [ ] T019 [US1] Implement GET /api/users endpoint in backend/src/main/java/com/example/usermanagement/controller/UserController.java with @RestController, @RequestMapping("/api/users"), @GetMapping returning List<UserDTO>
-- [ ] T020 [US1] Add getAllUsers() method to frontend/src/services/userService.ts making GET request to /api/users endpoint
-- [ ] T021 [US1] Create UserList component in frontend/src/components/UserList.tsx with useState, useEffect, table rendering all user fields, loading state, error handling
-- [ ] T022 [US1] Add empty state message in UserList.tsx when users array is empty, with text "No users found. Add the first user" and link
-- [ ] T023 [US1] Create App.tsx in frontend/src/App.tsx as main component rendering UserList with basic layout and styling
-- [ ] T024 [US1] Create main.tsx entry point in frontend/src/main.tsx with ReactDOM.createRoot and App component rendering
-- [ ] T025 [US1] Create frontend/public/index.html with root div and app title
+- [X] T018 [P] [US1] Implement UserService.getAllUsers() method in backend/src/main/java/com/example/usermanagement/service/UserService.java calling userRepository.findAll() and mapping to UserDTO list
+- [X] T019 [US1] Implement GET /api/users endpoint in backend/src/main/java/com/example/usermanagement/controller/UserController.java with @RestController, @RequestMapping("/api/users"), @GetMapping returning List<UserDTO>
+- [X] T020 [US1] Add getAllUsers() method to frontend/src/services/userService.ts making GET request to /api/users endpoint
+- [X] T021 [US1] Create UserList component in frontend/src/components/UserList.tsx with useState, useEffect, table rendering all user fields, loading state, error handling
+- [X] T022 [US1] Add empty state message in UserList.tsx when users array is empty, with text "No users found. Add the first user" and link
+- [X] T023 [US1] Create App.tsx in frontend/src/App.tsx as main component rendering UserList with basic layout and styling
+- [X] T024 [US1] Create main.tsx entry point in frontend/src/main.tsx with ReactDOM.createRoot and App component rendering
+- [X] T025 [US1] Create frontend/public/index.html with root div and app title
 
 **Checkpoint**: User Story 1 complete - can view all users in table independently
 
@@ -79,16 +79,16 @@
 
 ### Implementation for User Story 2
 
-- [ ] T026 [P] [US2] Implement UserService.createUser(CreateUserRequest request) method in backend/src/main/java/com/example/usermanagement/service/UserService.java with email uniqueness check, entity mapping, save, and DTO return
-- [ ] T027 [US2] Implement POST /api/users endpoint in backend/src/main/java/com/example/usermanagement/controller/UserController.java with @PostMapping, @Valid @RequestBody CreateUserRequest, @ResponseStatus(HttpStatus.CREATED)
-- [ ] T028 [US2] Add createUser(userData) method to frontend/src/services/userService.ts making POST request with user data
-- [ ] T029 [US2] Create UserForm component in frontend/src/components/UserForm.tsx with form state (firstName, lastName, email, phone), input fields, validation state, onSubmit handler, onCancel handler
-- [ ] T030 [US2] Add form validation to UserForm.tsx checking required fields (firstName, lastName, email), email format, displaying field-level errors
-- [ ] T031 [US2] Add server error handling to UserForm.tsx parsing validation errors from backend, displaying field-specific and general errors
-- [ ] T032 [US2] Add "Add New User" button to UserList.tsx component that shows UserForm component
-- [ ] T033 [US2] Implement form submission in UserForm.tsx calling userService.createUser(), handling success (show message, redirect to list), handling errors (display validation messages)
-- [ ] T034 [US2] Add cancel button handler in UserForm.tsx to return to list without saving
-- [ ] T035 [US2] Add success message display in UserList.tsx after successful user creation
+- [X] T026 [P] [US2] Implement UserService.createUser(CreateUserRequest request) method in backend/src/main/java/com/example/usermanagement/service/UserService.java with email uniqueness check, entity mapping, save, and DTO return
+- [X] T027 [US2] Implement POST /api/users endpoint in backend/src/main/java/com/example/usermanagement/controller/UserController.java with @PostMapping, @Valid @RequestBody CreateUserRequest, @ResponseStatus(HttpStatus.CREATED)
+- [X] T028 [US2] Add createUser(userData) method to frontend/src/services/userService.ts making POST request with user data
+- [X] T029 [US2] Create UserForm component in frontend/src/components/UserForm.tsx with form state (firstName, lastName, email, phone), input fields, validation state, onSubmit handler, onCancel handler
+- [X] T030 [US2] Add form validation to UserForm.tsx checking required fields (firstName, lastName, email), email format, displaying field-level errors
+- [X] T031 [US2] Add server error handling to UserForm.tsx parsing validation errors from backend, displaying field-specific and general errors
+- [X] T032 [US2] Add "Add New User" button to UserList.tsx component that shows UserForm component
+- [X] T033 [US2] Implement form submission in UserForm.tsx calling userService.createUser(), handling success (show message, redirect to list), handling errors (display validation messages)
+- [X] T034 [US2] Add cancel button handler in UserForm.tsx to return to list without saving
+- [X] T035 [US2] Add success message display in UserList.tsx after successful user creation
 
 **Checkpoint**: User Stories 1 AND 2 complete - can view and create users independently
 
@@ -102,17 +102,17 @@
 
 ### Implementation for User Story 3
 
-- [ ] T036 [P] [US3] Implement UserService.getUserById(Long id) method in backend/src/main/java/com/example/usermanagement/service/UserService.java with Optional handling, throwing EntityNotFoundException if not found
-- [ ] T037 [US3] Implement GET /api/users/{id} endpoint in backend/src/main/java/com/example/usermanagement/controller/UserController.java with @GetMapping("/{id}"), @PathVariable Long id
-- [ ] T038 [US3] Implement UserService.updateUser(Long id, UpdateUserRequest request) method in backend/src/main/java/com/example/usermanagement/service/UserService.java finding user, checking email uniqueness (excluding current user), updating fields, saving
-- [ ] T039 [US3] Implement PUT /api/users/{id} endpoint in backend/src/main/java/com/example/usermanagement/controller/UserController.java with @PutMapping("/{id}"), @PathVariable, @Valid @RequestBody
-- [ ] T040 [US3] Add getUserById(id) method to frontend/src/services/userService.ts making GET request to /api/users/{id}
-- [ ] T041 [US3] Add updateUser(id, userData) method to frontend/src/services/userService.ts making PUT request to /api/users/{id}
-- [ ] T042 [US3] Modify UserForm.tsx to accept optional user prop for edit mode, loading user data via useEffect when userId provided
-- [ ] T043 [US3] Update UserForm.tsx to call userService.updateUser() instead of createUser() when in edit mode
-- [ ] T044 [US3] Add "Edit" button to each user row in UserList.tsx table that opens UserForm with userId prop
-- [ ] T045 [US3] Update UserForm.tsx to display "Edit User" vs "Add New User" heading based on mode
-- [ ] T046 [US3] Add success message display after successful user update in UserList.tsx
+- [X] T036 [P] [US3] Implement UserService.getUserById(Long id) method in backend/src/main/java/com/example/usermanagement/service/UserService.java with Optional handling, throwing EntityNotFoundException if not found
+- [X] T037 [US3] Implement GET /api/users/{id} endpoint in backend/src/main/java/com/example/usermanagement/controller/UserController.java with @GetMapping("/{id}"), @PathVariable Long id
+- [X] T038 [US3] Implement UserService.updateUser(Long id, UpdateUserRequest request) method in backend/src/main/java/com/example/usermanagement/service/UserService.java finding user, checking email uniqueness (excluding current user), updating fields, saving
+- [X] T039 [US3] Implement PUT /api/users/{id} endpoint in backend/src/main/java/com/example/usermanagement/controller/UserController.java with @PutMapping("/{id}"), @PathVariable, @Valid @RequestBody
+- [X] T040 [US3] Add getUserById(id) method to frontend/src/services/userService.ts making GET request to /api/users/{id}
+- [X] T041 [US3] Add updateUser(id, userData) method to frontend/src/services/userService.ts making PUT request to /api/users/{id}
+- [X] T042 [US3] Modify UserForm.tsx to accept optional user prop for edit mode, loading user data via useEffect when userId provided
+- [X] T043 [US3] Update UserForm.tsx to call userService.updateUser() instead of createUser() when in edit mode
+- [X] T044 [US3] Add "Edit" button to each user row in UserList.tsx table that opens UserForm with userId prop
+- [X] T045 [US3] Update UserForm.tsx to display "Edit User" vs "Add New User" heading based on mode
+- [X] T046 [US3] Add success message display after successful user update in UserList.tsx
 
 **Checkpoint**: User Stories 1, 2, AND 3 complete - can view, create, and edit users independently
 
@@ -126,13 +126,13 @@
 
 ### Implementation for User Story 4
 
-- [ ] T047 [P] [US4] Implement UserService.deleteUser(Long id) method in backend/src/main/java/com/example/usermanagement/service/UserService.java checking if user exists, calling repository.deleteById()
-- [ ] T048 [US4] Implement DELETE /api/users/{id} endpoint in backend/src/main/java/com/example/usermanagement/controller/UserController.java with @DeleteMapping("/{id}"), @ResponseStatus(HttpStatus.NO_CONTENT)
-- [ ] T049 [US4] Add deleteUser(id) method to frontend/src/services/userService.ts making DELETE request to /api/users/{id}
-- [ ] T050 [US4] Add "Delete" button to each user row in UserList.tsx table with onClick handler
-- [ ] T051 [US4] Implement delete confirmation dialog in UserList.tsx using window.confirm() with message "Are you sure you want to delete this user?"
-- [ ] T052 [US4] Implement delete handler in UserList.tsx calling userService.deleteUser(id), removing user from state on success, refreshing list
-- [ ] T053 [US4] Add error handling for delete operation in UserList.tsx displaying appropriate error message if delete fails
+- [X] T047 [P] [US4] Implement UserService.deleteUser(Long id) method in backend/src/main/java/com/example/usermanagement/service/UserService.java checking if user exists, calling repository.deleteById()
+- [X] T048 [US4] Implement DELETE /api/users/{id} endpoint in backend/src/main/java/com/example/usermanagement/controller/UserController.java with @DeleteMapping("/{id}"), @ResponseStatus(HttpStatus.NO_CONTENT)
+- [X] T049 [US4] Add deleteUser(id) method to frontend/src/services/userService.ts making DELETE request to /api/users/{id}
+- [X] T050 [US4] Add "Delete" button to each user row in UserList.tsx table with onClick handler
+- [X] T051 [US4] Implement delete confirmation dialog in UserList.tsx using window.confirm() with message "Are you sure you want to delete this user?"
+- [X] T052 [US4] Implement delete handler in UserList.tsx calling userService.deleteUser(id), removing user from state on success, refreshing list
+- [X] T053 [US4] Add error handling for delete operation in UserList.tsx displaying appropriate error message if delete fails
 
 **Checkpoint**: All user stories complete - full CRUD functionality operational
 
