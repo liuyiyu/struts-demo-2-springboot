@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <!-- Set development mode to true for debugging -->
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.ui.theme" value="simple" />
+    <constant name="struts.action.extension" value="action" />
+    
+    <!-- Package configuration -->
+    <package name="default" extends="struts-default">
+        
+        <!-- Index action -->
+        <action name="index" class="com.example.action.IndexAction">
+            <result name="success">index.jsp</result>
+        </action>
+        
+        <!-- User management actions -->
+        <action name="userList" class="com.example.action.UserAction" method="list">
+            <result name="success">user-list.jsp</result>
+        </action>
+        
+        <action name="userForm" class="com.example.action.UserAction" method="showForm">
+            <result name="success">user-form.jsp</result>
+        </action>
+        
+        <action name="saveUser" class="com.example.action.UserAction" method="save">
+            <result name="success" type="redirectAction">userList</result>
+            <result name="input">user-form.jsp</result>
+        </action>
+        
+        <action name="editUser" class="com.example.action.UserAction" method="edit">
+            <result name="success">user-form.jsp</result>
+        </action>
+        
+        <action name="deleteUser" class="com.example.action.UserAction" method="delete">
+            <result name="success" type="redirectAction">userList</result>
+        </action>
+        
+    </package>
+</struts>

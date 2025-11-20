@@ -1,0 +1,1 @@
+Please use the INITIAL_PROMPT_TEMPLATE.md with Technology X being 'Struts and JSP' and Technology Y being 'Spring Boot' and create a `PROMPT-Struts-SpringBoot.md` that I can use to migrate the codebase. Make sure you analyze the codebase to adjust the template where appropriate.
